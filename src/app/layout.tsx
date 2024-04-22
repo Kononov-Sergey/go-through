@@ -1,4 +1,5 @@
-import MainHeader from "../../layouts/MainHeader";
+import "./globals.css";
+import MainHeader from "../layouts/MainHeader";
 
 const RootLayout = ({
   children,
@@ -6,7 +7,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => (
   <html lang="en">
-    <body>
+    <body className="w-screen h-screen flex flex-col">
       <MainHeader />
       {children}
     </body>

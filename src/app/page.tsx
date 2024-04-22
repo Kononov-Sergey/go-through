@@ -1,4 +1,4 @@
-import MainBody from "../../layouts/MainBody";
+import MainBody from "../layouts/MainBody";
 
 const Home = () => <MainBody />;
 

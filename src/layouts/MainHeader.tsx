@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 const MainHeader: FC<PropsWithChildren> = () => (
-  <header>
+  <header className="flex items-between gap-4 p-4">
     <Image
       src="/herzen.png"
-      width={300}
-      height={300}
+      width={100}
+      height={100}
       alt="логотип РГПУ им. А. И. Герцена"
+      priority
     />
     <nav className="flex">
       <ul>
