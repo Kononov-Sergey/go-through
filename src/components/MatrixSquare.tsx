@@ -1,5 +1,5 @@
 import { MatrixCell } from "@/types/Matrix";
-import { FC, useState } from "react";
+import { FC } from "react";
 import clsx from "clsx";
 import { useMatrixStore } from "@/store/matrix";
 
@@ -9,19 +9,17 @@ export interface MatrixSquareProps {
   cellInfo: MatrixCell;
 }
 
-const MatrixSquare: FC<MatrixSquareProps> = ({ cellInfo: { state }, xCord, yCord }) => {
+const MatrixSquare: FC<MatrixSquareProps> = ({
+  cellInfo: { state, animationDelay },
+  xCord,
+  yCord,
+}) => {
   const addAWall = useMatrixStore((store) => store.toggleWall);
-
-  const [effect, setEffect] = useState(false);
 
   const onCellClickHanadler = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    if (effect) {
-      return;
-    }
     if (event.buttons === 1 || event.buttons === 3) {
-      setEffect(true);
       addAWall(xCord, yCord);
     }
   };
@@ -33,14 +31,14 @@ const MatrixSquare: FC<MatrixSquareProps> = ({ cellInfo: { state }, xCord, yCord
       onMouseEnter={(event) => onCellClickHanadler(event)}
       disabled={state === "destination" || state === "start"}
       className={clsx(
-        "flex-1 border border-black",
-        effect && "animate-appear",
+        `flex-1 border border-black`,
         state === "default" && "bg-white",
         state === "start" && "bg-green-500",
         state === "wall" && "bg-black",
-        state === "destination" && "bg-blue-500"
+        state === "destination" && "bg-blue-500",
+        state === "visited" && "bg-orange-300"
       )}
-      onAnimationEnd={() => setEffect(false)}
+      style={{ transitionDelay: `${animationDelay}ms` }}
     />
   );
 };

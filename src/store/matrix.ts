@@ -12,6 +12,7 @@ export interface MatrixAction {
   initializeMatrixShape: () => void;
   addStartAndFinishPoint: () => void;
   toggleWall: (xCord: number, yCord: number) => void;
+  makeALine: () => void;
 }
 
 export const useMatrixStore = create<MatrixState & MatrixAction>()(
@@ -21,15 +22,17 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
       set(() => ({
         matrix: Array(45)
           .fill(0)
-          .map((row, rowIndex) =>
+          .map((_row, rowIndex) =>
             Array(80)
               .fill(0)
-              .map((cell, cellIndex) => ({
+              .map((_cell, cellIndex) => ({
                 id: `${rowIndex}${cellIndex}`,
                 state: "default",
                 pathLink: null,
+                animationDelay: 0,
+                animationIsOn: false,
               }))
-          ),
+          ) satisfies Matrix,
       })),
 
     addStartAndFinishPoint: () =>
@@ -42,7 +45,7 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
         ].state = "destination";
       }),
 
-    toggleWall: (xCord: number, yCord: number) =>
+    toggleWall: (xCord, yCord) =>
       set((state) => {
         const cell = state.matrix[xCord][yCord];
         if (cell.state === "destination" || cell.state === "start") {
@@ -53,6 +56,17 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
           return;
         }
         cell.state = "wall";
+      }),
+
+    makeALine: () =>
+      set((state) => {
+        for (let i = 0; i < state.matrix.length; i++) {
+          for (let j = 0; j < state.matrix[i].length; j++) {
+            const cell = state.matrix[i][j];
+            cell.state = "visited";
+            cell.animationDelay = (i + j) * 100;
+          }
+        }
       }),
   }))
 );
