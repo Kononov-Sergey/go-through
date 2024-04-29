@@ -10,11 +10,12 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        appear: "zoomIn 0.8s cubic-bezier(0.01, 1, 0.22, 1)",
+        appear: "zoomIn 0.4s ease-out",
       },
       keyframes: {
         zoomIn: {
           "0%": { scale: "0" },
+          "70%": { scale: "1.2" },
           "100%": { scale: "1" },
         },
       },

@@ -14,21 +14,28 @@ const MatrixSquare: FC<MatrixSquareProps> = ({ cellInfo: { state }, xCord, yCord
 
   const [effect, setEffect] = useState(false);
 
-  const onCellClickHanadler = () => {
-    setEffect(true);
-    addAWall(xCord, yCord);
+  const onCellClickHanadler = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (effect) {
+      return;
+    }
+    if (event.buttons === 1 || event.buttons === 3) {
+      setEffect(true);
+      addAWall(xCord, yCord);
+    }
   };
 
   return (
     <button
       aria-label={`${xCord}:${yCord} ячейка`}
       type="button"
-      onClick={onCellClickHanadler}
+      onMouseEnter={(event) => onCellClickHanadler(event)}
       disabled={state === "destination" || state === "start"}
       className={clsx(
         "flex-1 border border-black",
         effect && "animate-appear",
-        state === "default" && "bg-transparent",
+        state === "default" && "bg-white",
         state === "start" && "bg-green-500",
         state === "wall" && "bg-black",
         state === "destination" && "bg-blue-500"
