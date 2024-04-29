@@ -4,6 +4,7 @@
 
 import MatrixSquare from "@/components/MatrixCell";
 import { useMatrixStore } from "@/store/matrix";
+import { Transition } from "@headlessui/react";
 import { FC, useEffect } from "react";
 
 const MainBody: FC = () => {

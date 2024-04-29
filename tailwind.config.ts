@@ -8,7 +8,17 @@ const config: Config = {
     "./src/layouts/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        appear: "zoomIn 0.8s cubic-bezier(0.01, 1, 0.22, 1)",
+      },
+      keyframes: {
+        zoomIn: {
+          "0%": { scale: "0" },
+          "100%": { scale: "1" },
+        },
+      },
+    },
   },
   plugins: [],
 };

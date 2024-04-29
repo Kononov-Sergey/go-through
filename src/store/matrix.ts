@@ -45,6 +45,9 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
     toggleWall: (xCord: number, yCord: number) =>
       set((state) => {
         const cell = state.matrix[xCord][yCord];
+        if (cell.state === "destination" || cell.state === "start") {
+          return;
+        }
         if (cell.state === "wall") {
           cell.state = "default";
           return;
