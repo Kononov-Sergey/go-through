@@ -21,10 +21,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require("tailwind-safelist-generator")({
-      patterns: ["delay-{gap}"],
-    }),
-  ],
+  plugins: [],
 };
 export default config;

@@ -2,7 +2,8 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-import { Matrix } from "../types/Matrix";
+import { QueueItem } from "@/types/AlgorighmsTypes";
+import { Matrix } from "../types/MatrixTypes";
 
 export interface MatrixState {
   matrix: Matrix;
@@ -12,7 +13,7 @@ export interface MatrixAction {
   initializeMatrixShape: () => void;
   addStartAndFinishPoint: () => void;
   toggleWall: (xCord: number, yCord: number) => void;
-  makeALine: () => void;
+  setCellState: (newCellInfo: QueueItem) => void;
 }
 
 export const useMatrixStore = create<MatrixState & MatrixAction>()(
@@ -58,15 +59,10 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
         cell.state = "wall";
       }),
 
-    makeALine: () =>
+    setCellState: ({ xCord, yCord, newState }) =>
       set((state) => {
-        for (let i = 0; i < state.matrix.length; i++) {
-          for (let j = 0; j < state.matrix[i].length; j++) {
-            const cell = state.matrix[i][j];
-            cell.state = "visited";
-            cell.animationDelay = (i + j) * 100;
-          }
-        }
+        const cell = state.matrix[xCord][yCord];
+        cell.state = newState;
       }),
   }))
 );

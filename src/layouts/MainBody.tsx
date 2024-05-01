@@ -3,6 +3,7 @@
 "use client";
 
 import MatrixSquare from "@/components/MatrixSquare";
+import { paintTheMaze } from "@/maze-solvers/algorithms";
 import { useMatrixStore } from "@/store/matrix";
 
 import { FC, useEffect } from "react";
@@ -10,7 +11,8 @@ import { FC, useEffect } from "react";
 const MainBody: FC = () => {
   const initializeMatrixShape = useMatrixStore((store) => store.initializeMatrixShape);
   const addStartAndFinish = useMatrixStore((store) => store.addStartAndFinishPoint);
-  const addLine = useMatrixStore((store) => store.makeALine);
+  const setCellState = useMatrixStore((store) => store.setCellState);
+
   const matrix = useMatrixStore((store) => store.matrix);
 
   useEffect(() => {
@@ -18,9 +20,19 @@ const MainBody: FC = () => {
     addStartAndFinish();
   }, [initializeMatrixShape, addStartAndFinish]);
 
+  const paint = () => {
+    const queue = paintTheMaze(matrix);
+
+    queue.forEach((newCellInfo, index) => {
+      setTimeout(() => {
+        setCellState(newCellInfo);
+      }, index * 50);
+    });
+  };
+
   return (
     <main className="flex-1 flex flex-col w-full p-8 overflow-auto">
-      <button type="button" onClick={addLine}>
+      <button type="button" onClick={paint}>
         click
       </button>
       {matrix.map((row, rowIndex) => (
@@ -28,6 +40,7 @@ const MainBody: FC = () => {
           {row.map((cell, columnIndex) => (
             <MatrixSquare
               key={cell.id}
+              id={cell.id}
               cellInfo={cell}
               xCord={rowIndex}
               yCord={columnIndex}
