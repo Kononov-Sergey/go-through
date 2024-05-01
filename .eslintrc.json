@@ -25,6 +25,10 @@
         "namedComponents": "arrow-function"
       }
     ],
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-restricted-syntax": ["off", "ForOfStatement"],
+    "rules": {
+      "prefer-destructuring": ["error", { "object": true, "array": false }]
+    }
   }
 }

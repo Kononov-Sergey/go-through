@@ -3,36 +3,44 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 import { QueueItem } from "@/types/AlgorighmsTypes";
-import { Matrix } from "../types/MatrixTypes";
+import { Matrix, MatrixCell } from "../types/MatrixTypes";
 
 export interface MatrixState {
   matrix: Matrix;
+  startCell: MatrixCell | null;
 }
 
 export interface MatrixAction {
   initializeMatrixShape: () => void;
   addStartAndFinishPoint: () => void;
   toggleWall: (xCord: number, yCord: number) => void;
-  setCellState: (newCellInfo: QueueItem) => void;
+  setCellInfo: (newCellInfo: QueueItem) => void;
 }
 
 export const useMatrixStore = create<MatrixState & MatrixAction>()(
   immer((set) => ({
+    // states
     matrix: [],
+    startCell: null,
+
+    // actions
     initializeMatrixShape: () =>
       set(() => ({
-        matrix: Array(45)
+        matrix: Array(5)
           .fill(0)
           .map((_row, rowIndex) =>
-            Array(80)
+            Array(10)
               .fill(0)
-              .map((_cell, cellIndex) => ({
-                id: `${rowIndex}${cellIndex}`,
-                state: "default",
-                pathLink: null,
-                animationDelay: 0,
-                animationIsOn: false,
-              }))
+              .map(
+                (_cell, cellIndex) =>
+                  ({
+                    id: `${rowIndex}${cellIndex}`,
+                    state: "default",
+                    pathLink: null,
+                    row: rowIndex,
+                    column: cellIndex,
+                  }) satisfies MatrixCell
+              )
           ) satisfies Matrix,
       })),
 
@@ -41,9 +49,12 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
         const storeMatrix = state.matrix;
 
         storeMatrix[3][3].state = "start";
+        storeMatrix[3][3].pathLink = { column: 3, row: 3 };
         storeMatrix[storeMatrix.length - 4][
           storeMatrix[storeMatrix.length - 4].length - 4
         ].state = "destination";
+
+        state.startCell = storeMatrix[3][3];
       }),
 
     toggleWall: (xCord, yCord) =>
@@ -59,10 +70,9 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
         cell.state = "wall";
       }),
 
-    setCellState: ({ xCord, yCord, newState }) =>
+    setCellInfo: ({ xCord, yCord, newCell }) =>
       set((state) => {
-        const cell = state.matrix[xCord][yCord];
-        cell.state = newState;
+        state.matrix[xCord][yCord] = newCell;
       }),
   }))
 );

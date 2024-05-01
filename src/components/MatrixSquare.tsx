@@ -39,7 +39,8 @@ const MatrixSquare: FC<MatrixSquareProps> = ({
         state === "start" && "bg-green-500",
         state === "wall" && "bg-black",
         state === "destination" && "bg-blue-500",
-        state === "visited" && "bg-orange-300 "
+        state === "visited" && "bg-orange-300 ",
+        state === "path" && "bg-indigo-700"
       )}
     />
   );

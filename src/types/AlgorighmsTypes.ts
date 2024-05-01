@@ -1,7 +1,7 @@
-import { CellState } from "./MatrixTypes";
+import { MatrixCell } from "./MatrixTypes";
 
 export interface QueueItem {
   xCord: number;
   yCord: number;
-  newState: CellState;
+  newCell: MatrixCell;
 }
