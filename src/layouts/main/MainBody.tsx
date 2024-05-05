@@ -3,12 +3,13 @@
 "use client";
 
 import MatrixSquare from "@/components/MatrixSquare";
-import { bfs, findThePath, paintTheMaze } from "@/maze-solvers/algorithms";
+import { bfs } from "@/algorithms/maze-solvers/Breadth-FirstSearch";
 import { useMatrixStore } from "@/store/matrix";
-import animateQueues from "@/utils/AnimateQueues";
 
 import { FC, useEffect } from "react";
 import MainSettingsPanel from "./MainSettingsPanel";
+import { displayThePath } from "@/algorithms/utils/displayThePath";
+import animateQueues from "@/algorithms/utils/animateQueues";
 
 const MainBody: FC = () => {
   const initializeMatrixShape = useMatrixStore((store) => store.initializeMatrixShape);
@@ -24,7 +25,7 @@ const MainBody: FC = () => {
 
   const paint = () => {
     const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(matrix, matrix[3][3]);
-    const { historyQueue: pathQueue } = findThePath(bfsMatrix);
+    const { historyQueue: pathQueue } = displayThePath(bfsMatrix);
     animateQueues([bfsQueue, pathQueue], setCellState);
   };
 

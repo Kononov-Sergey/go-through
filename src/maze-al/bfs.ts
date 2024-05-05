@@ -1,18 +1,6 @@
 import { QueueItem } from "@/types/AlgorighmsTypes";
 import { Matrix, MatrixCell } from "@/types/MatrixTypes";
 
-export const paintTheMaze = (matrix: Matrix) => {
-  const queue: QueueItem[] = [];
-
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = 0; j < matrix[i].length; j++) {
-      queue.push({ xCord: i, yCord: j, newCell: { ...matrix[i][j], state: "visited" } });
-    }
-  }
-
-  return queue;
-};
-
 export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
   const tempStartCell = { ...startCell };
   const tempMatrix = JSON.parse(JSON.stringify(matrix)) as Matrix;
@@ -81,29 +69,4 @@ export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
   }
 
   return { historyQueue, tempMatrix };
-};
-
-export const findThePath = (matrix: Matrix) => {
-  const tempMatrix = JSON.parse(JSON.stringify(matrix)) as Matrix;
-  const historyQueue: QueueItem[] = [];
-
-  let currentCell = {
-    ...tempMatrix.flat().find((cell) => cell.state === "destination")!,
-  };
-
-  while (currentCell && currentCell.state !== "start") {
-    currentCell.state = "path";
-
-    if (currentCell.pathLink) {
-      currentCell = tempMatrix[currentCell.pathLink.row][currentCell.pathLink.column];
-    }
-
-    historyQueue.push({
-      xCord: currentCell.row,
-      yCord: currentCell.column,
-      newCell: currentCell,
-    });
-  }
-
-  return { historyQueue, matrix };
 };
