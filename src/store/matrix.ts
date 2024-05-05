@@ -26,10 +26,10 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
     // actions
     initializeMatrixShape: () =>
       set(() => ({
-        matrix: Array(5)
+        matrix: Array(25)
           .fill(0)
           .map((_row, rowIndex) =>
-            Array(10)
+            Array(40)
               .fill(0)
               .map(
                 (_cell, cellIndex) =>
@@ -73,6 +73,17 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
     setCellInfo: ({ xCord, yCord, newCell }) =>
       set((state) => {
         state.matrix[xCord][yCord] = newCell;
+      }),
+
+    clearMatrix: () =>
+      set((state) => {
+        state.matrix = state.matrix.map((row) =>
+          row.map((cell) => ({
+            ...cell,
+            pathLink: null,
+            state: "default",
+          }))
+        );
       }),
   }))
 );
