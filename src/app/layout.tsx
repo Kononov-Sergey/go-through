@@ -1,5 +1,5 @@
 import "./globals.css";
-import MainHeader from "../layouts/MainHeader";
+import MainHeader from "../layouts/main/MainHeader";
 
 const RootLayout = ({
   children,

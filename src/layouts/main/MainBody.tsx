@@ -8,6 +8,7 @@ import { useMatrixStore } from "@/store/matrix";
 import animateQueues from "@/utils/AnimateQueues";
 
 import { FC, useEffect } from "react";
+import MainSettingsPanel from "./MainSettingsPanel";
 
 const MainBody: FC = () => {
   const initializeMatrixShape = useMatrixStore((store) => store.initializeMatrixShape);
@@ -29,6 +30,7 @@ const MainBody: FC = () => {
 
   return (
     <main className="flex-1 flex flex-col w-full overflow-auto">
+      <MainSettingsPanel />
       {matrix.map((row, rowIndex) => (
         <div className="w-full flex flex-1" key={rowIndex}>
           {row.map((cell, columnIndex) => (

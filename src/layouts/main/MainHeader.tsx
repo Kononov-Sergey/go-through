@@ -20,7 +20,7 @@ const MainHeader: FC<PropsWithChildren> = () => (
           <Link href="/">Главная</Link>
         </li>
         <li className="text-xl font-light transition-transform hover:scale-105">
-          <Link href="/about">Теория</Link>
+          <Link href="/theory">Теория</Link>
         </li>
       </ul>
     </nav>
