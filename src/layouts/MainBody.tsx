@@ -28,10 +28,7 @@ const MainBody: FC = () => {
   };
 
   return (
-    <main className="flex-1 flex flex-col w-full p-8 overflow-auto">
-      <button type="button" onClick={paint}>
-        click
-      </button>
+    <main className="flex-1 flex flex-col w-full overflow-auto">
       {matrix.map((row, rowIndex) => (
         <div className="w-full flex flex-1" key={rowIndex}>
           {row.map((cell, columnIndex) => (

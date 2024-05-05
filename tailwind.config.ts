@@ -19,6 +19,10 @@ const config: Config = {
           "100%": { scale: "1" },
         },
       },
+      fontFamily: {
+        "space-mono": ["Space Mono", "monospace"],
+        "noto-sans": ["Noto Sans", "sans-serif"],
+      },
     },
   },
   plugins: [],
