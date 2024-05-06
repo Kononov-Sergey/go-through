@@ -4,16 +4,23 @@ import { FC } from "react";
 import animateQueues from "@/algorithms/utils/animateQueues";
 import { MinimumSpanningTree } from "@/algorithms/maze-generators/MinimumSpanningTree";
 import { useMatrixStore } from "@/store/matrix";
+import { displayThePath } from "@/algorithms/utils/displayThePath";
+import { bfs } from "@/algorithms/maze-solvers/Breadth-FirstSearch";
 
 const MainSettingsPanel: FC = () => {
+  const setCellInfo = useMatrixStore((store) => store.setCellInfo);
   const setMatrix = useMatrixStore((store) => store.setMatrix);
   const matrix = useMatrixStore((store) => store.matrix);
 
-  const paint = () => {
-    // const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(matrix, matrix[3][3]);
-    // const { historyQueue: pathQueue } = displayThePath(bfsMatrix);
+  const mst = () => {
     const { tempMatrix: MSTMatrix } = MinimumSpanningTree(matrix);
     setMatrix(MSTMatrix);
+  };
+
+  const paintBfs = () => {
+    const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(matrix, matrix[3][3]);
+    const { historyQueue: pathQueue } = displayThePath(bfsMatrix);
+    animateQueues([bfsQueue, pathQueue], setCellInfo);
   };
 
   return (
@@ -27,9 +34,14 @@ const MainSettingsPanel: FC = () => {
           Настройки
         </AccordionSummary>
         <AccordionDetails>
-          <button type="button" onClick={paint}>
-            mst
-          </button>
+          <div className="flex flex-col gap-4">
+            <button type="button" onClick={mst}>
+              mst
+            </button>
+            <button type="button" onClick={paintBfs}>
+              bfs
+            </button>
+          </div>
         </AccordionDetails>
       </Accordion>
     </div>
