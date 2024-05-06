@@ -2,7 +2,7 @@ import { QueueItem } from "@/types/AlgorighmsTypes";
 import { Matrix } from "@/types/MatrixTypes";
 
 export const displayThePath = (matrix: Matrix) => {
-  const tempMatrix = JSON.parse(JSON.stringify(matrix)) as Matrix;
+  const tempMatrix: Matrix = JSON.parse(JSON.stringify(matrix));
   const historyQueue: QueueItem[] = [];
 
   let currentCell = {

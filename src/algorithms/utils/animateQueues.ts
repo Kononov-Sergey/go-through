@@ -2,7 +2,8 @@ import { QueueItem } from "@/types/AlgorighmsTypes";
 
 const animateQueues = (
   queues: QueueItem[][],
-  callback: (newCellInfo: QueueItem) => void
+  callback: (newCellInfo: QueueItem) => void,
+  speed: number = 50
 ) => {
   let index = 0;
 
@@ -13,7 +14,7 @@ const animateQueues = (
       if (newCellInfo) {
         setTimeout(() => {
           callback(newCellInfo);
-        }, index * 50);
+        }, index * speed);
       }
     }
   }

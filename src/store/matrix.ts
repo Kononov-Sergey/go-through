@@ -15,6 +15,7 @@ export interface MatrixAction {
   addStartAndFinishPoint: () => void;
   toggleWall: (xCord: number, yCord: number) => void;
   setCellInfo: (newCellInfo: QueueItem) => void;
+  setMatrix: (newMatrix: Matrix) => void;
 }
 
 export const useMatrixStore = create<MatrixState & MatrixAction>()(
@@ -73,6 +74,11 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
     setCellInfo: ({ xCord, yCord, newCell }) =>
       set((state) => {
         state.matrix[xCord][yCord] = newCell;
+      }),
+
+    setMatrix: (matrix: Matrix) =>
+      set((state) => {
+        state.matrix = matrix;
       }),
 
     clearMatrix: () =>
