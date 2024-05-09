@@ -27,7 +27,7 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
     // actions
     initializeMatrixShape: () =>
       set(() => ({
-        matrix: Array(25)
+        matrix: Array(24)
           .fill(0)
           .map((_row, rowIndex) =>
             Array(40)

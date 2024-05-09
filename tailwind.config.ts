@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        appear: "zoomIn 0.4s ease-out",
+        appear: "zoomIn 0.4s ease-in-out",
       },
       keyframes: {
         zoomIn: {

@@ -6,6 +6,7 @@ import { MinimumSpanningTree } from "@/algorithms/maze-generators/MinimumSpannin
 import { useMatrixStore } from "@/store/matrix";
 import { displayThePath } from "@/algorithms/utils/displayThePath";
 import { bfs } from "@/algorithms/maze-solvers/Breadth-FirstSearch";
+import animateNewMatrix from "@/algorithms/utils/animateMatrix";
 
 const MainSettingsPanel: FC = () => {
   const setCellInfo = useMatrixStore((store) => store.setCellInfo);
@@ -14,13 +15,13 @@ const MainSettingsPanel: FC = () => {
 
   const mst = () => {
     const { tempMatrix: MSTMatrix } = MinimumSpanningTree(matrix);
-    setMatrix(MSTMatrix);
+    animateNewMatrix(MSTMatrix, setCellInfo);
   };
 
   const paintBfs = () => {
     const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(matrix, matrix[3][3]);
     const { historyQueue: pathQueue } = displayThePath(bfsMatrix);
-    animateQueues([bfsQueue, pathQueue], setCellInfo);
+    animateQueues([bfsQueue, pathQueue], setCellInfo, 5);
   };
 
   return (
