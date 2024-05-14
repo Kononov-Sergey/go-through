@@ -20,21 +20,23 @@ const MainBody: FC = () => {
   }, [initializeMatrixShape, addStartAndFinish]);
 
   return (
-    <main className="flex-1 flex flex-col w-full overflow-auto">
+    <main className="flex-1 flex flex-col gap-4">
       <MainSettingsPanel />
-      {matrix.map((row, rowIndex) => (
-        <div className="w-full flex flex-1" key={rowIndex}>
-          {row.map((cell, columnIndex) => (
-            <MatrixSquare
-              key={cell.id}
-              id={cell.id}
-              cellInfo={cell}
-              xCord={rowIndex}
-              yCord={columnIndex}
-            />
-          ))}
-        </div>
-      ))}
+      <div className="flex-1 flex flex-col">
+        {matrix.map((row, rowIndex) => (
+          <div className="w-full flex flex-1" key={rowIndex}>
+            {row.map((cell, columnIndex) => (
+              <MatrixSquare
+                key={cell.id}
+                id={cell.id}
+                cellInfo={cell}
+                xCord={rowIndex}
+                yCord={columnIndex}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </main>
   );
 };
