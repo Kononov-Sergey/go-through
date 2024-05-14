@@ -7,6 +7,7 @@ import { useMatrixStore } from "@/store/matrix";
 import { displayThePath } from "@/algorithms/utils/displayThePath";
 import { bfs } from "@/algorithms/maze-solvers/Breadth-FirstSearch";
 import animateNewMatrix from "@/algorithms/utils/animateMatrix";
+import clearTheMatrix from "@/algorithms/utils/clearVisitedCells";
 
 const MainSettingsPanel: FC = () => {
   const setCellInfo = useMatrixStore((store) => store.setCellInfo);
@@ -15,13 +16,28 @@ const MainSettingsPanel: FC = () => {
 
   const mst = () => {
     const { tempMatrix: MSTMatrix } = MinimumSpanningTree(matrix);
-    animateNewMatrix(MSTMatrix, setCellInfo);
+    animateNewMatrix(MSTMatrix, setCellInfo, 400);
   };
 
   const paintBfs = () => {
-    const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(matrix, matrix[3][3]);
+    const { tempMatrix: clearedMatrix } = clearTheMatrix(matrix, setCellInfo);
+    /**
+     * This function performs a breadth-first search on the matrix,
+     * and then displays the path from the start cell to the destination cell
+     */
+    const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(
+      clearedMatrix,
+      clearedMatrix[3][3]
+    );
+    /**
+     * This function takes the matrix with BFS path and displays it
+     */
     const { historyQueue: pathQueue } = displayThePath(bfsMatrix);
-    animateQueues([bfsQueue, pathQueue], setCellInfo, 5);
+    /**
+     * This function animates an array of queues, by calling setCellInfo
+     * with each item in the queue, and a delay of 10ms between each animation step
+     */
+    animateQueues([bfsQueue, pathQueue], setCellInfo, 10);
   };
 
   return (

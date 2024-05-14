@@ -6,7 +6,7 @@ export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
   const tempMatrix = JSON.parse(JSON.stringify(matrix)) as Matrix;
   const queue: MatrixCell[] = [];
   const historyQueue: QueueItem[] = [];
-  let findADestination = false;
+  let destinationIsFound = false;
   const directions = [
     { row: -1, column: 0 },
     { row: 0, column: 1 },
@@ -21,11 +21,15 @@ export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
     newCell: tempStartCell,
   });
 
-  while (queue.length > 0 && !findADestination) {
-    const currentCell = queue.shift()!;
+  while (queue.length > 0 && !destinationIsFound) {
+    const currentCell = queue.shift();
+
+    if (!currentCell) {
+      break;
+    }
 
     if (currentCell.state === "destination") {
-      findADestination = true;
+      destinationIsFound = true;
       break;
     }
 
@@ -43,7 +47,7 @@ export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
         tempMatrix[nextRow][nextColumn].state !== "start"
       ) {
         if (tempMatrix[nextRow][nextColumn].state === "destination") {
-          findADestination = true;
+          destinationIsFound = true;
           tempMatrix[nextRow][nextColumn].pathLink = {
             row: currentCell.row,
             column: currentCell.column,
@@ -68,5 +72,5 @@ export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
     }
   }
 
-  return { historyQueue, tempMatrix };
+  return { historyQueue, tempMatrix, destinationIsFound };
 };

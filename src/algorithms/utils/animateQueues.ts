@@ -1,11 +1,15 @@
 import { QueueItem } from "@/types/AlgorighmsTypes";
 
 const animateQueues = (
-  queues: QueueItem[][],
+  queues: QueueItem[][] | undefined,
   setStateCallback: (newCellInfo: QueueItem) => void,
   speed: number = 50
 ) => {
   let index = 0;
+
+  if (!queues) {
+    return;
+  }
 
   for (let queue of queues) {
     while (queue.length > 0) {

@@ -14,13 +14,15 @@ export const displayThePath = (matrix: Matrix) => {
 
     if (currentCell.pathLink) {
       currentCell = tempMatrix[currentCell.pathLink.row][currentCell.pathLink.column];
-    }
 
-    historyQueue.push({
-      xCord: currentCell.row,
-      yCord: currentCell.column,
-      newCell: currentCell,
-    });
+      historyQueue.push({
+        xCord: currentCell.row,
+        yCord: currentCell.column,
+        newCell: currentCell,
+      });
+    } else {
+      break;
+    }
   }
 
   return { historyQueue, matrix };
