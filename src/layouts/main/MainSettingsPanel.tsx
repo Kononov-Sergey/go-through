@@ -1,13 +1,13 @@
 import { Accordion, AccordionDetails, AccordionSummary, Button } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import { FC } from "react";
-import animateQueues from "@/algorithms/utils/animateQueues";
+import animateQueues from "@/algorithms/animations/animateQueues";
 import { MinimumSpanningTree } from "@/algorithms/maze-generators/MinimumSpanningTree";
 import { useMatrixStore } from "@/store/matrix";
-import { displayThePath } from "@/algorithms/utils/displayThePath";
+import { displayThePath } from "@/algorithms/maze-solvers/displayThePath";
 import { bfs } from "@/algorithms/maze-solvers/Breadth-FirstSearch";
-import animateNewMatrix from "@/algorithms/utils/animateMatrix";
-import clearTheMatrix from "@/algorithms/utils/clearVisitedCells";
+import animateNewMatrix from "@/algorithms/animations/animateMatrix";
+import animateMatrixCleaning from "@/algorithms/utils/clearVisitedCells";
 import AStar from "@/algorithms/maze-solvers/AStar";
 
 const MainSettingsPanel: FC = () => {
@@ -20,7 +20,7 @@ const MainSettingsPanel: FC = () => {
   };
 
   const paintBFS = () => {
-    const { tempMatrix: clearedMatrix } = clearTheMatrix(matrix, setCellInfo);
+    const { tempMatrix: clearedMatrix } = animateMatrixCleaning(matrix, setCellInfo);
     const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(
       clearedMatrix,
       clearedMatrix[3][3]
@@ -31,7 +31,7 @@ const MainSettingsPanel: FC = () => {
   };
 
   const paintAStar = () => {
-    const { tempMatrix: clearedMatrix } = clearTheMatrix(matrix, setCellInfo);
+    const { tempMatrix: clearedMatrix } = animateMatrixCleaning(matrix, setCellInfo);
     const { historyQueue: AStarQueue, tempMatrix: AStarMatrix } = AStar(
       clearedMatrix,
       clearedMatrix[3][3],

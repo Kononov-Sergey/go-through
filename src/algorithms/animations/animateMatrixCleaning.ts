@@ -1,7 +1,7 @@
 import { QueueItem } from "@/types/AlgorighmsTypes";
 import { Matrix } from "@/types/MatrixTypes";
 
-const clearTheMatrix = (
+const animateMatrixCleaning = (
   matrix: Matrix,
   setCellInfo: (newCellInfo: QueueItem) => void
 ) => {
@@ -26,4 +26,4 @@ const clearTheMatrix = (
   return { tempMatrix };
 };
 
-export default clearTheMatrix;
+export default animateMatrixCleaning;
