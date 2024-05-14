@@ -27,10 +27,10 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
     // actions
     initializeMatrixShape: () =>
       set(() => ({
-        matrix: Array(24)
+        matrix: Array(25)
           .fill(0)
           .map((_row, rowIndex) =>
-            Array(40)
+            Array(41)
               .fill(0)
               .map(
                 (_cell, cellIndex) =>

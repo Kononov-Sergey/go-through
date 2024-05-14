@@ -33,6 +33,7 @@ const MatrixSquare: FC<MatrixSquareProps> = ({
       type="button"
       onMouseEnter={(event) => onCellClickHanadler(event)}
       disabled={state === "destination" || state === "start"}
+      title={`${xCord}:${yCord} ячейка`}
       className={clsx(
         `flex-1 border border-black transition-colors duration-200 cursor-default`,
         state === "default" ? "bg-white" : "animate-appear",

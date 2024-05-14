@@ -15,6 +15,10 @@ const animateMatrixCleaning = (
       ) {
         tempMatrix[row][column].state = "default";
 
+        if (tempMatrix[row][column].pathLink) {
+          tempMatrix[row][column].pathLink = null;
+        }
+
         setCellInfo({
           xCord: row,
           yCord: column,

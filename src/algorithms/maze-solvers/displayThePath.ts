@@ -12,6 +12,10 @@ export const displayThePath = (matrix: Matrix) => {
   while (currentCell && currentCell.state !== "start") {
     currentCell.state = "path";
 
+    if (!currentCell.pathLink) {
+      break;
+    }
+
     if (currentCell.pathLink) {
       currentCell = tempMatrix[currentCell.pathLink.row][currentCell.pathLink.column];
 
@@ -20,8 +24,6 @@ export const displayThePath = (matrix: Matrix) => {
         yCord: currentCell.column,
         newCell: currentCell,
       });
-    } else {
-      break;
     }
   }
 

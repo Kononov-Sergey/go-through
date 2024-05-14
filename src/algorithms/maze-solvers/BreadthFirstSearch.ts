@@ -1,18 +1,19 @@
 import { QueueItem } from "@/types/AlgorighmsTypes";
 import { Matrix, MatrixCell } from "@/types/MatrixTypes";
 
+const directions = [
+  { row: -1, column: 0 },
+  { row: 0, column: 1 },
+  { row: 1, column: 0 },
+  { row: 0, column: -1 },
+];
+
 export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
   const tempStartCell = { ...startCell };
   const tempMatrix = JSON.parse(JSON.stringify(matrix)) as Matrix;
   const queue: MatrixCell[] = [];
   const historyQueue: QueueItem[] = [];
   let destinationIsFound = false;
-  const directions = [
-    { row: -1, column: 0 },
-    { row: 0, column: 1 },
-    { row: 1, column: 0 },
-    { row: 0, column: -1 },
-  ];
 
   queue.push(tempStartCell);
   historyQueue.push({
