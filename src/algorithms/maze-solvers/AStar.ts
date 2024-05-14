@@ -23,7 +23,7 @@ const AStar = (matrix: Matrix, startCell: MatrixCell, endCell: MatrixCell) => {
     }
 
     if (currentCell.id === endCell.id) {
-      return { historyQueue, tempMatrix };
+      return { historyQueue, matrix };
     }
 
     openSet = openSet.filter((cell) => cell.id !== currentCell.id);
@@ -72,7 +72,7 @@ const AStar = (matrix: Matrix, startCell: MatrixCell, endCell: MatrixCell) => {
     }
   }
 
-  return { historyQueue, tempMatrix };
+  return { historyQueue, matrix: tempMatrix };
 };
 
 export default AStar;

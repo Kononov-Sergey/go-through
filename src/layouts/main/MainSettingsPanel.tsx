@@ -7,7 +7,7 @@ import { useMatrixStore } from "@/store/matrix";
 import { displayThePath } from "@/algorithms/maze-solvers/displayThePath";
 import { bfs } from "@/algorithms/maze-solvers/Breadth-FirstSearch";
 import animateNewMatrix from "@/algorithms/animations/animateMatrix";
-import animateMatrixCleaning from "@/algorithms/utils/clearVisitedCells";
+import animateMatrixCleaning from "@/algorithms/animations/animateMatrixCleaning";
 import AStar from "@/algorithms/maze-solvers/AStar";
 
 const MainSettingsPanel: FC = () => {
@@ -21,7 +21,7 @@ const MainSettingsPanel: FC = () => {
 
   const paintBFS = () => {
     const { tempMatrix: clearedMatrix } = animateMatrixCleaning(matrix, setCellInfo);
-    const { historyQueue: bfsQueue, tempMatrix: bfsMatrix } = bfs(
+    const { historyQueue: bfsQueue, matrix: bfsMatrix } = bfs(
       clearedMatrix,
       clearedMatrix[3][3]
     );
@@ -32,7 +32,7 @@ const MainSettingsPanel: FC = () => {
 
   const paintAStar = () => {
     const { tempMatrix: clearedMatrix } = animateMatrixCleaning(matrix, setCellInfo);
-    const { historyQueue: AStarQueue, tempMatrix: AStarMatrix } = AStar(
+    const { historyQueue: AStarQueue, matrix: AStarMatrix } = AStar(
       clearedMatrix,
       clearedMatrix[3][3],
       clearedMatrix[clearedMatrix.length - 4][clearedMatrix[0].length - 4]

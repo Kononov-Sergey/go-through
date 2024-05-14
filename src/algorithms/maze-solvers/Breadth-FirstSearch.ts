@@ -72,5 +72,5 @@ export const bfs = (matrix: Matrix, startCell: MatrixCell) => {
     }
   }
 
-  return { historyQueue, tempMatrix, destinationIsFound };
+  return { historyQueue, matrix: tempMatrix, destinationIsFound };
 };
