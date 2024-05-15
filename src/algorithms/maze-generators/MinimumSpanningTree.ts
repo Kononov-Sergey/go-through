@@ -49,7 +49,8 @@ export const MinimumSpanningTree = (matrix: Matrix) => {
         newRow < tempMatrix.length &&
         newColumn >= 0 &&
         newColumn < tempMatrix[0].length &&
-        tempMatrix[newRow][newColumn].state === "wall"
+        (tempMatrix[newRow][newColumn].state === "wall" ||
+          tempMatrix[newRow][newColumn].state === "destination")
       ) {
         const newCell = tempMatrix[newRow][newColumn];
         const midPointRow = (newRow + startRow) / 2;
@@ -57,10 +58,15 @@ export const MinimumSpanningTree = (matrix: Matrix) => {
         const midPointCell = tempMatrix[midPointRow][midPointColumn];
 
         frontierCellsList.push([newRow, newColumn, startRow, startColumn]);
-        tempMatrix[newRow][newColumn].state = "default";
-        historyQueue.push({ xCord: newRow, yCord: newColumn, newCell });
+        if (newCell.state !== "destination") {
+          tempMatrix[newRow][newColumn].state = "default";
+          historyQueue.push({ xCord: newRow, yCord: newColumn, newCell });
+        }
 
-        if (tempMatrix[startRow][startColumn].state !== "start") {
+        if (
+          tempMatrix[startRow][startColumn].state !== "start" &&
+          tempMatrix[startRow][startColumn].state !== "destination"
+        ) {
           tempMatrix[startRow][startColumn].state = "default";
           historyQueue.push({
             xCord: startRow,

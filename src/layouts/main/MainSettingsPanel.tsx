@@ -17,7 +17,7 @@ const MainSettingsPanel: FC = () => {
 
   const paintMST = () => {
     const { tempMatrix: MSTMatrix } = MinimumSpanningTree(matrix);
-    animateNewMatrix(MSTMatrix, setCellInfo, 400);
+    animateNewMatrix(MSTMatrix, setCellInfo, 10);
   };
 
   const paintBFS = () => {
