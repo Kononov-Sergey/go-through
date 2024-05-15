@@ -1,5 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button } from "@mui/material";
-import { ExpandMore } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { FC } from "react";
 import animateQueues from "@/algorithms/animations/animateQueues";
 import { MinimumSpanningTree } from "@/algorithms/maze-generators/MinimumSpanningTree";

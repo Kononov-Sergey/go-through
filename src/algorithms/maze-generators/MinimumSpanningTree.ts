@@ -1,5 +1,4 @@
-import { Matrix, MatrixCell } from "@/types/MatrixTypes";
-import isConnected from "../utils/isConnected";
+import { Matrix } from "@/types/MatrixTypes";
 import { QueueItem } from "@/types/AlgorighmsTypes";
 import random from "../utils/random";
 

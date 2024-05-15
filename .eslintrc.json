@@ -26,7 +26,7 @@
       }
     ],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "no-restricted-syntax": ["off", "ForOfStatement"],
+    "no-restricted-syntax": ["error", "ForOfStatement"],
     "rules": {
       "prefer-destructuring": ["error", { "object": true, "array": false }]
     }
