@@ -9,7 +9,7 @@ import animateNewMatrix from "@/algorithms/animations/animateMatrix";
 import animateMatrixCleaning from "@/algorithms/animations/animateMatrixCleaning";
 import AStar from "@/algorithms/maze-solvers/AStar";
 import depthFirstSearch from "@/algorithms/maze-solvers/DepthFirstSearch";
-import recursiveDivisionVerticalSkew from "@/algorithms/maze-generators/RecursiveDivisionVertical";
+import randowMaze from "@/algorithms/maze-generators/RandomMaze";
 
 const MainSettingsPanel: FC = () => {
   const setCellInfo = useMatrixStore((store) => store.setCellInfo);
@@ -17,20 +17,16 @@ const MainSettingsPanel: FC = () => {
   const matrix = useMatrixStore((store) => store.matrix);
 
   const paintMST = () => {
-    const { tempMatrix: MSTMatrix } = MinimumSpanningTree(matrix);
+    clearMatrix();
+    const { matrix: MSTMatrix } = MinimumSpanningTree(matrix);
     animateNewMatrix(MSTMatrix, setCellInfo, 10);
   };
 
-  const paintRecursiveDivisionVerticalSkewHandler = () => {
+  const paintRandomMaze = () => {
+    clearMatrix();
     const { tempMatrix: clearedMatrix } = animateMatrixCleaning(matrix, setCellInfo);
-
-    const { historyQueue: recursiveQueue } = recursiveDivisionVerticalSkew(
-      clearedMatrix,
-      clearedMatrix.length,
-      clearedMatrix[0].length
-    );
-
-    animateQueues([recursiveQueue], setCellInfo, 10);
+    const { historyQueue: randomQueue } = randowMaze(clearedMatrix);
+    animateQueues([randomQueue], setCellInfo, 10);
   };
 
   const paintBFS = () => {
@@ -74,8 +70,8 @@ const MainSettingsPanel: FC = () => {
       <Button variant="contained" onClick={paintMST}>
         MST
       </Button>
-      <Button variant="contained" onClick={paintRecursiveDivisionVerticalSkewHandler}>
-        Рекурсивное деление с вертикальным наклоном
+      <Button variant="contained" onClick={paintRandomMaze}>
+        Случайный лабиринт
       </Button>
       <Button variant="contained" onClick={paintBFS}>
         BFS

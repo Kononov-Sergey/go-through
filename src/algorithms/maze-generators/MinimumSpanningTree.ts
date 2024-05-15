@@ -86,5 +86,5 @@ export const MinimumSpanningTree = (matrix: Matrix) => {
     }
   }
 
-  return { tempMatrix, historyQueue };
+  return { matrix: tempMatrix, historyQueue };
 };
