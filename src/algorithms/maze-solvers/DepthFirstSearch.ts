@@ -15,13 +15,6 @@ export function depthFirstSearch(matrix: Matrix, startCell: MatrixCell) {
   const historyQueue: QueueItem[] = [];
   let destinationIsFound = false;
 
-  tempStartCell.state = "visited";
-  historyQueue.push({
-    xCord: tempStartCell.row,
-    yCord: tempStartCell.column,
-    newCell: tempStartCell,
-  });
-
   stack.push(tempStartCell);
 
   while (stack.length > 0 && !destinationIsFound) {

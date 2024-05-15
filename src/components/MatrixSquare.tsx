@@ -37,11 +37,11 @@ const MatrixSquare: FC<MatrixSquareProps> = ({
       className={clsx(
         `flex-1 border border-black transition-colors duration-200 cursor-default`,
         state === "default" ? "bg-white" : "animate-appear",
-        state === "start" && "bg-green-500",
-        state === "wall" && "bg-black",
-        state === "destination" && "bg-blue-500",
+        state === "start" && "bg-green-400",
+        state === "wall" && "bg-gray-500",
+        state === "destination" && "bg-blue-400",
         state === "visited" && "bg-orange-300 ",
-        state === "path" && "bg-indigo-700"
+        state === "path" && "bg-indigo-500"
       )}
     />
   );
