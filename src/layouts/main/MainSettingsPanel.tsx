@@ -12,6 +12,7 @@ import depthFirstSearch from "@/algorithms/maze-solvers/DepthFirstSearch";
 
 const MainSettingsPanel: FC = () => {
   const setCellInfo = useMatrixStore((store) => store.setCellInfo);
+  const clearMatrix = useMatrixStore((store) => store.clearMatrix);
   const matrix = useMatrixStore((store) => store.matrix);
 
   const paintMST = () => {
@@ -51,6 +52,10 @@ const MainSettingsPanel: FC = () => {
     animateQueues([AStarQueue, pathQueue], setCellInfo, 10);
   };
 
+  const clearMatrixHandler = () => {
+    clearMatrix();
+  };
+
   return (
     <div className="flex gap-4">
       <Button variant="contained" onClick={paintMST}>
@@ -64,6 +69,9 @@ const MainSettingsPanel: FC = () => {
       </Button>
       <Button variant="contained" onClick={paintAStar}>
         A*
+      </Button>
+      <Button variant="contained" onClick={clearMatrixHandler}>
+        Очистить матрицу
       </Button>
     </div>
   );

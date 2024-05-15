@@ -16,6 +16,7 @@ export interface MatrixAction {
   toggleWall: (xCord: number, yCord: number) => void;
   setCellInfo: (newCellInfo: QueueItem) => void;
   setMatrix: (newMatrix: Matrix) => void;
+  clearMatrix: () => void;
 }
 
 export const useMatrixStore = create<MatrixState & MatrixAction>()(
@@ -84,11 +85,12 @@ export const useMatrixStore = create<MatrixState & MatrixAction>()(
     clearMatrix: () =>
       set((state) => {
         state.matrix = state.matrix.map((row) =>
-          row.map((cell) => ({
-            ...cell,
-            pathLink: null,
-            state: "default",
-          }))
+          row.map((cell) => {
+            if (cell.state === "start" || cell.state === "destination") {
+              return { ...cell, pathLink: null };
+            }
+            return { ...cell, pathLink: null, state: "default" };
+          })
         );
       }),
   }))
