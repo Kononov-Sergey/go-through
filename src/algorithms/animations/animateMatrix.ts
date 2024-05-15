@@ -1,6 +1,5 @@
 import { QueueItem } from "@/types/AlgorighmsTypes";
 import { Matrix } from "@/types/MatrixTypes";
-import { log } from "console";
 
 const animateNewMatrix = (
   matrix: Matrix,
