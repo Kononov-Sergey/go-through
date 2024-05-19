@@ -43,7 +43,9 @@ const MatrixSquare: FC<MatrixSquareProps> = ({
         state === "visited" && "bg-orange-300 ",
         state === "path" && "bg-indigo-500"
       )}
-    />
+    >
+      {/* {xCord + ":" + yCord} */}
+    </button>
   );
 };
 

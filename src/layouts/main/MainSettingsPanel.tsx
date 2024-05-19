@@ -10,6 +10,7 @@ import animateMatrixCleaning from "@/algorithms/animations/animateMatrixCleaning
 import AStar from "@/algorithms/maze-solvers/AStar";
 import depthFirstSearch from "@/algorithms/maze-solvers/DepthFirstSearch";
 import randowMaze from "@/algorithms/maze-generators/RandomMaze";
+import recursiveDivision from "@/algorithms/maze-generators/recursiveDivision";
 
 const MainSettingsPanel: FC = () => {
   const setCellInfo = useMatrixStore((store) => store.setCellInfo);
@@ -27,6 +28,19 @@ const MainSettingsPanel: FC = () => {
     const { tempMatrix: clearedMatrix } = animateMatrixCleaning(matrix, setCellInfo);
     const { historyQueue: randomQueue } = randowMaze(clearedMatrix);
     animateQueues([randomQueue], setCellInfo, 10);
+  };
+
+  const paintRecursiveDivision = () => {
+    clearMatrix();
+    recursiveDivision(
+      matrix,
+      0,
+      matrix.length - 1,
+      0,
+      matrix[0].length - 1,
+      "vertical",
+      setCellInfo
+    );
   };
 
   const paintBFS = () => {
@@ -72,6 +86,9 @@ const MainSettingsPanel: FC = () => {
       </Button>
       <Button variant="contained" onClick={paintRandomMaze}>
         Случайный лабиринт
+      </Button>
+      <Button variant="contained" onClick={paintRecursiveDivision}>
+        Рекурсия
       </Button>
       <Button variant="contained" onClick={paintBFS}>
         BFS
