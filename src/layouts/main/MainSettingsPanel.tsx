@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import animateQueues from "@/algorithms/animations/animateQueues";
 import { MinimumSpanningTree } from "@/algorithms/maze-generators/MinimumSpanningTree";
 import { useMatrixStore } from "@/store/matrix";
