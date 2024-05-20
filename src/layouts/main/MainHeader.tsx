@@ -19,9 +19,6 @@ const MainHeader: FC<PropsWithChildren> = () => (
         <li className="text-xl font-light transition-transform hover:scale-105">
           <Link href="/">Главная</Link>
         </li>
-        <li className="text-xl font-light transition-transform hover:scale-105">
-          <Link href="/theory">Теория</Link>
-        </li>
       </ul>
     </nav>
   </header>

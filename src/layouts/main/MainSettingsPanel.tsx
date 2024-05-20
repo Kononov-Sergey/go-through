@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import animateQueues from "@/algorithms/animations/animateQueues";
-import { MinimumSpanningTree } from "@/algorithms/maze-generators/MinimumSpanningTree";
+import MinimumSpanningTree from "@/algorithms/maze-generators/MinimumSpanningTree";
 import { useMatrixStore } from "@/store/matrix";
 import { displayThePath } from "@/algorithms/maze-solvers/displayThePath";
 import { bfs } from "@/algorithms/maze-solvers/BreadthFirstSearch";
@@ -82,24 +82,24 @@ const MainSettingsPanel: FC = () => {
   return (
     <div className="flex gap-4">
       <Button variant="contained" onClick={paintMST}>
-        MST
+        Алгоритм Прима
       </Button>
       <Button variant="contained" onClick={paintRandomMaze}>
         Случайный лабиринт
       </Button>
       <Button variant="contained" onClick={paintRecursiveDivision}>
-        Рекурсия
+        Рекурсивное деление
       </Button>
-      <Button variant="contained" onClick={paintBFS}>
+      <Button color="secondary" variant="contained" onClick={paintBFS}>
         BFS
       </Button>
-      <Button variant="contained" onClick={paintDFS}>
+      <Button color="secondary" variant="contained" onClick={paintDFS}>
         DFS
       </Button>
-      <Button variant="contained" onClick={paintAStar}>
+      <Button color="secondary" variant="contained" onClick={paintAStar}>
         A*
       </Button>
-      <Button variant="contained" onClick={clearMatrixHandler}>
+      <Button variant="outlined" onClick={clearMatrixHandler}>
         Очистить матрицу
       </Button>
     </div>

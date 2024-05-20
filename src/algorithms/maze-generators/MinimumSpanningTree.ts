@@ -2,7 +2,7 @@ import { Matrix } from "@/types/MatrixTypes";
 import { QueueItem } from "@/types/AlgorighmsTypes";
 import random from "../utils/random";
 
-export const MinimumSpanningTree = (matrix: Matrix) => {
+const MinimumSpanningTree = (matrix: Matrix) => {
   const historyQueue: QueueItem[] = [];
 
   const frontierCellsList: [number, number, number, number][] = [];
@@ -88,3 +88,5 @@ export const MinimumSpanningTree = (matrix: Matrix) => {
 
   return { matrix: tempMatrix, historyQueue };
 };
+
+export default MinimumSpanningTree;
